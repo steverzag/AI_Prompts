@@ -2,14 +2,12 @@
 
 import { Post } from "@app-types/Post";
 import Form from "@components/Form";
-//import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, Suspense, useEffect, useState } from "react";
 
-const UpdatePrompt = () => {
+const UpdatePromptElement = () => {
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({} as Post);
-  //const { data: session } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
   const promptId = searchParams.get("id");
@@ -57,5 +55,9 @@ const UpdatePrompt = () => {
     ></Form>
   );
 };
+
+const UpdatePrompt = () => {
+    return <Suspense><UpdatePromptElement/></Suspense>
+}
 
 export default UpdatePrompt;
